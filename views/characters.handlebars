@@ -1,0 +1,52 @@
+<h1>LOTR Characters</h1>
+<h3>Add New Character</h3>
+<form name='add_character' action='/characters' method='post'>
+	First Name:<br>
+	<input type='text' name='first_name'><br>
+	Last Name:<br>
+	<input type='text' name='last_name'><br>
+	
+	Homeland:<br>
+	<select name='place_id'>
+		{{#each places}}
+		<option value='{{id}}'>{{name}}</option>
+		{{/each}}
+		<option value='NULL'>Unknown</option>
+	</select><br>
+
+	Race:<br>
+	<select name='race_id'>
+		{{#each races}}
+		<option value='{{id}}'>{{name}}</option>
+		{{/each}}
+	</select><br>
+
+	<input type='submit' id='character_submit' value='Add Character'>
+</form>
+<br>
+<h3>Current Characters</h3>
+<table>
+	<thead>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Homeland</th>
+		<th>Race</th>
+	</thead>
+
+	<tbody>
+		{{#each characters}}
+		<tr>
+			<td>{{first_name}}</td>
+			<td>{{last_name}}</td>
+			<td>{{homeland}}</td>
+			<td>{{race}}</td>
+
+			<!-- WILL COVER DELETE/UPDATE LATER...-->
+			<td><button onclick=#>Delete</button></td>
+			<td><a href="/characters/1">Update</a></td>
+
+		</tr>
+		{{/each}}
+	</tbody>
+
+</table>
