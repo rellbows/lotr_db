@@ -14,7 +14,7 @@ var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
 app.engine('handlebars', handlebars.engine);
 app.use(bodyParser.urlencoded({extended:true}));
-app.use('/static', express.static('public'));
+app.use('/static', express.static('public')); // where static .js files are served
 app.set('view engine', 'handlebars');
 app.set('port', 3000);
 app.set('mysql', mysql);
