@@ -1,17 +1,23 @@
-<!-- HARDCODED FOR STEP 4-->
-<h1>Update Frodo Baggins:</h1>
-<form id='update_character' action='/people' method='post'>
+<h1>Update {{character.first_name}} {{character.last_name}}:</h1>
+<form id='update_character' action='/characters' method='post'>
 	First Name:<br>
-	<input type='text' name='first_name' value='Frodo'><br>
+	<input type='text' name='first_name' value='{{character.first_name}}'><br>
 	Last Name:<br>
-	<input type='text' name='last_name' value='Baggins'><br>
+	<input type='text' name='last_name' value='{{character.last_name}}'><br>
 	Homeland:<br>
-	<select name='place_id'>
-		<option value='3'>The Shire</option>
+	<select name='place_id' id='place_selector'>
+		{{#each places}}
+		<option value='{{id}}'>{{name}}</option>
+		{{/each}}
+		<option value='NULL'>Unknown</option>
 	</select><br>
 	Race:<br>
-	<select name='race_id'>
-		<option value='4'>Hobbit</option>
-	</select><br>
-	<button onclick=#>Update</button>
+	<select name='race_id' id='race_selector'>
+		{{#each races}}
+		<option value='{{id}}'>{{name}}</option>
+		{{/each}}
+	</select>
 </form>
+<button onclick='updateCharacter({{character.id}})'>Update</button>
+<script defer>selectPlace({{character.place_id}});</script>
+<script defer>selectRace({{character.race_id}});</script>
