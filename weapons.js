@@ -14,6 +14,20 @@ module.exports = function(){
 		});
 	};
 
+	function getWeapon(res, mysql, context, id, complete){
+		var sql = 'SELECT lotr_weapon.id, name, power FROM lotr_weapon WHERE lotr_weapon.id = ?';
+		var inserts = [id];
+		mysql.pool.query(sql, inserts, function(error, results, fields){
+			if(error){
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			context.weapon = results[0];
+			complete();
+		});
+	};
+
+	// displays the current db and add form
 	router.get('/', function(req, res){
 		var callbackCount = 0;
 		var context = {};
@@ -41,6 +55,38 @@ module.exports = function(){
 			}
 			else{
 				res.redirect('/weapons');
+			}
+		});
+	});
+
+	// pulls up the update weapon page
+	router.get('/:id', function(req, res){
+		callbackCount = 0;
+		var context = {};
+		context.jsscripts = ['update_weapon.js'];
+		var mysql = req.app.get('mysql');
+		getWeapon(res, mysql, context, req.params.id, complete);
+		function complete(){
+			callbackCount++;
+			if (callbackCount >= 1) {
+				res.render('update_weapon.handlebars', context);
+			};
+		}
+	});
+
+	// updates weapon based off data from update weapon page
+	router.put('/:id', function(req, res){
+		var mysql = req.app.get('mysql');
+		var sql = 'UPDATE lotr_weapon SET name=?, power=? WHERE id=?';
+		var inserts = [req.body.name, req.body.power, req.params.id];
+		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+			if(error){
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			else{
+				res.status(200);
+				res.end();
 			}
 		});
 	});
