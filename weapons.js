@@ -25,7 +25,26 @@ module.exports = function(){
 			if(callbackCount >= 1){
 				res.render('weapons.handlebars', context);
 			}
-		}
+		};
 	});
+
+	// add a weapon
+	router.post('/', function(req, res){
+		var mysql = req.app.get('mysql');
+		var sql = 'INSERT INTO lotr_weapon (name, power) VALUES (?,?)';
+		var inserts = [req.body.name, req.body.power];
+		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+			if(error){
+				console.log(JSON.stringify(eror));
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			else{
+				res.redirect('/weapons');
+			}
+		});
+	});
+
 	return router;
+
 }();
