@@ -28,9 +28,7 @@ app.get('/', function(req, res){
 app.use('/characters', require('./characters.js'));
 
 //brings up weapons page
-app.get('/weapons', function(req, res){
-	res.render('weapons.handlebars')
-});
+app.use('/weapons', require('./weapons.js'));
 
 // places page
 app.get('/places', function(req, res){
