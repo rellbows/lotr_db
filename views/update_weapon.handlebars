@@ -1,0 +1,8 @@
+<h1>Update {{weapon.name}}:</h1>
+<form id='update_weapon' action='/weapons' method='post'>
+	Name:<br>
+	<input type='text' name='name' value='{{weapon.name}}'><br>
+	Power:<br>
+	<input type='number' name='power' value='{{weapon.power}}' min='1' max='10'><br>
+</form>
+<button onclick='updateWeapon({{weapon.id}})'>Update</button>
