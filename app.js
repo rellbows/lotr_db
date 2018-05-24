@@ -31,9 +31,7 @@ app.use('/characters', require('./characters.js'));
 app.use('/weapons', require('./weapons.js'));
 
 // places page
-app.get('/places', function(req, res){
-	res.render('places.handlebars')
-});
+app.use('/places', require('./places.js'));
 
 // races page
 app.get('/races', function(req, res){

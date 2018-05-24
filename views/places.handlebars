@@ -1,6 +1,25 @@
 <h1>LOTR Places</h1>
-<form name="place-data">
+<h3>Add New Place</h3>
+<form name='add_character' action='/places' method='post'>
 	Name:<br>
 	<input type='text' name='name'><br>
 	<input type='submit' id='place_submit' value='Add Place'>
 </form>
+<br>
+<h3>Current Places</h3>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Located In</th>
+	</thead>
+	<tbody>
+		{{#each places}}
+		<tr>
+			<td>{{name}}</td>
+			<td>{{located_in}}</td>
+			<td><button onclick='deletePlace({{id}})'>Delete</button></td>
+			<td><a href='/places/{{id}}'>Update</a></td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
