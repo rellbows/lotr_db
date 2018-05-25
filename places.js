@@ -88,5 +88,7 @@ module.exports = function(){
 		});
 	});
 
+	// TODO still need delete route
+
 	return router;
 }();

@@ -38,6 +38,8 @@ app.get('/races', function(req, res){
 	res.render('races.handlebars')
 });
 
+app.use('/characters_weapons', require('./characters_weapons.js'));
+
 //bad url route
 app.use(function(req, res){
 	res.status(404);
