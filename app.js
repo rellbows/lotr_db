@@ -34,9 +34,7 @@ app.use('/weapons', require('./weapons.js'));
 app.use('/places', require('./places.js'));
 
 // races page
-app.get('/races', function(req, res){
-	res.render('races.handlebars')
-});
+app.use('/races', require('./races.js'));
 
 app.use('/characters_weapons', require('./characters_weapons.js'));
 

@@ -1,0 +1,7 @@
+<h1> Update {{race.name}}</h1>
+<form id='update_race' action='/races' method='post'>
+	Name:<br>
+	<input type='text' name='name' value='{{race.name}}'><br>
+	<input type='checkbox' name='free' value='TRUE' {{#if race.free}}checked='checked'{{/if}}>Free<br>
+</form>
+<button onclick='updateRace({{race.id}})'>Update</button>

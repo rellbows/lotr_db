@@ -9,7 +9,7 @@
 
 <!-- TODO update with backend to add place in place relationship -->
 <h3>Add Place Located In Place Relationship</h3>
-<form name='add_place_locacted_in' action='/parent_id/:pid/child_id/:cid' method='post'>
+<form name='add_place_locacted_in' action='places/place_located_in' method='post'>
 	Place:<br>
 	<select name='child_place_id'>
 		{{#each places}}
@@ -37,10 +37,12 @@
 		<tr>
 			<td>{{name}}</td>
 			<td>{{located_in}}</td>
-
-			<!-- TODO update with delete functionality -->
-			<td><button onclick='#'>Delete</button></td>
-
+			<td><button onclick='deletePlace({{id}})'>Delete</button></td>
+			{{#if located_in}}
+				<td><button onclick='deletePlaceLocatedIn({{child_place_id}}, {{parent_place_id}})'>Delete 'Located In'</button></td>
+			{{else}}
+				<td></td>
+			{{/if}}
 			<td><a href='/places/{{id}}'>Update</a></td>
 		</tr>
 		{{/each}}

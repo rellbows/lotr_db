@@ -1,9 +1,9 @@
 <h1>LOTR Races</h1>
 <h3>Add New Race</h3>
-<form name="race-data">
+<form name="add_race" action='/races' method='POST'>
 	Name:<br>
 	<input type='text' name='name'><br>
-	<input type='checkbox' name='free' value='TRUE'>Free<br>
+	<input type='checkbox' name='free' value='TRUE' checked='checked'>Free<br>
 	<input type='submit' id='race_submit' value='Add Race'>
 </form>
 <br>
@@ -11,12 +11,20 @@
 <table>
 	<thead>
 		<th>Name</th>
+		<th>Free</th>
 	</thead>
 	<tbody>
+	{{#each races}}
 		<tr>
-			<td>race_name</td>
-			<td><button onclick='#'>Delete</td>
-			<td><a href='#'>Update</a></td>
+			<td>{{name}}</td>
+			{{#if free}}
+				<td>Free</td>
+			{{else}}
+				<td>Enslaved</td>
+			{{/if}}
+			<td><button onclick='deleteRace({{id}})''>Delete</td>
+			<td><a href='/races/{{id}}'>Update</a></td>
 		</tr>
+	{{/each}}
 	</tbody>
 </table>
