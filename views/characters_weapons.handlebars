@@ -3,28 +3,38 @@
 <!-- TODO need to double check all of this and hookup the backend-->
 
 <h3>Associate a Weapon with a Character</h3>
-<form name='character_weapon_data'>
+<form name='add_character_weapon' action='/characters_weapons' method='post'>
 	Character:<br>
 	<select name='character_id'>
-		<option value='1'>first_name last_name</option>
+		{{#each characters}}
+		<option value='{{id}}'>{{first_name}} {{last_name}}</option>
+		{{/each}}
 	</select><br>
 	Weapon:<br>
 	<select name='weapon_id'>
-		<option value='1'>weapon_name</option>
+		{{#each weapons}}
+		<option value='{{id}}'>{{name}}</option>
+		{{/each}}
 	</select>
 	<br>
-	<input type='submit' value='Submit'>
+	<input type='submit' id='character_weapon_submit' value='Add Character/Weapon Combo'>
 </form>
 <br>
 <h3>Current Character/Weapon Combinations</h3>
 <table>
 	<thead>
-		<th>Name</th>
-		<th>Weapon</th>
+		<th>Character Name</tr>
+		<th>Weapon Name</th>
+		<th>Power</th>
 	</thead>
 	<tbody>
-		<td>first_name last_name</td>
-		<td>weapon_name</td>
-		<td><button onclick='#''>Delete</button></td>
+		{{#each characters_with_weapons}}
+		<tr>
+			<td>{{char_name}}</td>
+			<td>{{weapon_name}}</td>
+			<td>{{power}}</td>
+			<td><button onclick='#''>Delete</button></td>
+		</tr>
+		{{/each}}
 	</tbody>
 </table>
