@@ -1,0 +1,16 @@
+<h1>{{character_name.char_name}} Weapon List:</h1>
+<table>
+	<thead>
+		<th>Weapon Name</th>
+		<th>Power</th>
+	</thead>
+	<tbody>
+		{{#each character_with_weapons}}
+		<tr>
+			<td>{{weapon_name}}</td>
+			<td>{{power}}</td>
+			<td><button onclick='deleteCharacterWithWeapon({{character_id}}, {{weapon_id}})'>Delete</button></td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>

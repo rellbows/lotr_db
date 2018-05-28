@@ -1,7 +1,5 @@
 <h1>Characters and Their Weapons</h1>
 
-<!-- TODO need to double check all of this and hookup the backend-->
-
 <h3>Associate a Weapon with a Character</h3>
 <form name='add_character_weapon' action='/characters_weapons' method='post'>
 	Character:<br>
@@ -20,6 +18,16 @@
 	<input type='submit' id='character_weapon_submit' value='Add Character/Weapon Combo'>
 </form>
 <br>
+<h3>Search Weapons for Character</h3>
+<form name='search_character_with_weapons' action='characters_weapons/search_character_with_weapons' method='post'>
+	<select name='character_id'>
+		{{#each characters_with_weapons}}
+		<option value='{{character_id}}'>{{char_name}}</option>
+		{{/each}}
+	</select><br>
+	<input type='submit' value='Search Character's List'>
+</form>
+<br>
 <h3>Current Character/Weapon Combinations</h3>
 <table>
 	<thead>
@@ -33,7 +41,7 @@
 			<td>{{char_name}}</td>
 			<td>{{weapon_name}}</td>
 			<td>{{power}}</td>
-			<td><button onclick='#''>Delete</button></td>
+			<td><button onclick='deleteCharacterWithWeapon({{character_id}}, {{weapon_id}})''>Delete</button></td>
 		</tr>
 		{{/each}}
 	</tbody>

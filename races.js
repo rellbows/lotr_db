@@ -41,14 +41,12 @@ module.exports = function(){
 	});
 
 	router.post('/', function(req, res){
-		console.log(req.body)
 		if(req.body.free == 'TRUE') {
 			req.body.free = true;
 		}
 		else{
 			req.body.free = false;
 		}
-		console.log(req.body);
 		var mysql = req.app.get('mysql');
 		var sql = 'INSERT INTO lotr_race (name, free) VALUES (?, ?)';
 		var inserts = [req.body.name, req.body.free];
@@ -77,7 +75,30 @@ module.exports = function(){
 				res.render('update_race.handlebars', context);
 			}
 		}
-	})
+	});
+
+	// updates race based off data from update race page
+	router.put('/:id', function(req, res){
+		if(req.body.free == 'TRUE') {
+			req.body.free = true;
+		}
+		else{
+			req.body.free = false;
+		}
+		var mysql = req.app.get('mysql');
+		var sql = 'UPDATE lotr_race SET name=?, free=? WHERE id=?';
+		var inserts = [req.body.name, req.body.free, req.params.id];
+		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+			if(error){
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			else{
+				res.status(200);
+				res.end();
+			}
+		});
+	});
 
 	router.delete('/:id', function(req, res){
 		var mysql = req.app.get('mysql');
