@@ -1,0 +1,11 @@
+<h1>Update {{character_name.char_name}}'s Weapon Choice:</h1>
+<form id='update_character_weapon' action='/characters_weapons' method='post'>
+	Weapon:<br>
+	<select name='weapon_id' id='weapon_selector'>
+		{{#each weapons}}
+		<option value='{{id}}'>{{name}}</option>
+		{{/each}}
+	</select>
+</form>
+<button onclick='updateCharacterWithWeapon({{character_with_weapon.character_id}}, {{character_with_weapon.weapon_id}})'>Update</button>
+<script defer>selectWeapon({{character_with_weapon.weapon_id}});</script>
